@@ -1,4 +1,5 @@
 from random import randint
+import configuration
 import db_functions
 
 def generate_code():
@@ -9,7 +10,7 @@ def generate_code():
             break
         else:
             pass
-    db_functions.write_user_code(num)
+    db_functions.write_user_code(num, str(configuration.name))
     return num
 
 def generate_admin_code():

@@ -16,8 +16,8 @@ def create_admin_db():
     except sqlite3.OperationalError:
         print("Admin is already created")
 
-def write_user_code(code):
-    cursor.execute(f"insert into Users values ({code}, 'Sasha', 1, 0, 0) ")
+def write_user_code(code, name):
+    cursor.execute(f"""insert into Users values ({code}, "{name}", 0, 0, 0) """)
     connection.commit()
 
 def write_admin_code(code):
