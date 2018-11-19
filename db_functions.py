@@ -4,20 +4,20 @@ cursor = connection.cursor()
 
 def create_db():
     try:
-        cursor.execute("CREATE TABLE Users(Code INT, Name TEXT, Status INT)")
+        cursor.execute("CREATE TABLE Users(Code INT, Name TEXT, Status INT, Money INT)")
         print("DB created")
     except sqlite3.OperationalError:
         print("DB is already created")
 
 def create_admin_db():
     try:
-        cursor.execute("CREATE TABLE Admins(Code INT, Name TEXT, Money INT)")
+        cursor.execute("CREATE TABLE Admins(Code INT, Name TEXT, Money INT, Parent INT)")
         print("Admin DB created")
     except sqlite3.OperationalError:
         print("Admin is already created")
 
 def write_user_code(code):
-    cursor.execute(f"insert into Users values ({code}, 'Sasha', 1) ")
+    cursor.execute(f"insert into Users values ({code}, 'Sasha', 1, 0, 0) ")
     connection.commit()
 
 def write_admin_code(code):
