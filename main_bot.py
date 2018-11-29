@@ -45,7 +45,8 @@ def answer(message):
     elif configuration.status == 3:
         configuration.name = message.text
         user_code = other_functions.generate_code()
-        bot.send_message(message.chat.id, user_code)
+        bot.send_message(message.chat.id, f"Ты успешно зарегистрировался в системе, вот твой уникальный код: {user_code}")
+        bot.send_message(message.chat.id, "Не забудь подойти к организаторам :)")
         log_functions.log("Code generated", message.chat.id, user_code)
         configuration.status = 0
 
