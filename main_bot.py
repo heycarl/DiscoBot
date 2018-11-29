@@ -9,7 +9,6 @@ bot = telebot.TeleBot(configuration.token)
 @bot.message_handler(commands=['start'])
 def answer(message):
     bot.send_message(message.chat.id, configuration.start_text)
-    bot.send_message(message.chat.id, "Сейчас введи свое Имя и Фамилию, заранее спасибо!")
     configuration.status = 3
 
 @bot.message_handler(commands=['auth'])
