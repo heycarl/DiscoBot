@@ -30,6 +30,11 @@ def answer(message):
 def answer(message):
     bot.send_message(message.chat.id, configuration.info_str)
 
+@bot.message_handler(commands=['checkpay'])
+def answer(message):
+    bot.send_message(message.chat.id, configuration.checkpay_text)
+    configuration.status = 4
+
 @bot.message_handler(content_types=['text'])
 def answer(message):
     if configuration.status == 1:
@@ -48,5 +53,15 @@ def answer(message):
         bot.send_message(message.chat.id, "Не забудь подойти к организаторам :)")
         log_functions.log("Code generated", message.chat.id, user_code)
         configuration.status = 0
+    elif configuration.status == 4:
+        code = message.text
+        log_functions.log("Code checking started", message.chat.id, code)
+        bot.send_message(message.chat.id, db_functions.check_user_pay(code))
+        configuration.status = 0
+    elif configuration.status == 2:
+        code = message.text
+        bot.send_message(message.chat.id, db_functions.update_user_pay(code))
+
+
 
 bot.polling(none_stop=True)
