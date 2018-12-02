@@ -16,6 +16,11 @@ def answer(message):
     bot.send_message(message.chat.id, "Введите код администратора: ")
     configuration.status = 1
 
+@bot.message_handler(commands=['deauth'])
+def answer(message):
+    configuration.status = 0
+    bot.send_message(message.chat.id, "Вы успешно вышли из системы")
+
 @bot.message_handler(commands=['newadmin'])
 def answer(message):
     print("1231231")

@@ -69,16 +69,20 @@ def update_user_pay(code):
         return "Такого пользователя не существет"
     except sqlite3.OperationalError:
         return "Ошибка в БД. Если вы это видете, значит все печально и нужно написать @afimchik"
+    except ValueError:
+        return "Такого пользователя не существет"
 
 def check_admin_code(code):
     try:
         cursor.execute("SELECT Code FROM Admins")
         row = cursor.fetchall()
         for item in row:
-            if item[0] == code:
+            if item[0] == int(code):
                 return 1
             else:
                 pass
         return 0
     except sqlite3.OperationalError:
+        return 0
+    except ValueError:
         return 0
