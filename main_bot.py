@@ -39,7 +39,7 @@ def answer(message):
 def answer(message):
     if configuration.status == 1:
         code = message.text
-        if db_functions.check_admin_code(int(code)) == 1:
+        if db_functions.check_admin_code(code) == 1:
             bot.send_message(message.chat.id, "Вы успешно вошли в систему")
             print("Auth OK")
             configuration.status = 2
