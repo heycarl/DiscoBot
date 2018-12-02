@@ -38,14 +38,17 @@ def check_user_code(code):
         return 0
 
 def check_user_pay(code):
-    cursor.execute(f"SELECT * FROM Users WHERE Code LIKE '%{str(code)}%';")
-    row = cursor.fetchall()
-    row = list(row[0])[2]
-    if row != 0:
-        st = """С твоим статусом все отлично, желаем хорошо оторваться на дискотеке"""
-    else:
-        st = """На данный момент ты не можешь пройти на дискотеку, в ближайшее время найди организаторов ( Дима Сивашко 10 ''A'', Артур Демьянченко 11 "A" )"""
-    return st
+    try:
+        cursor.execute(f"SELECT * FROM Users WHERE Code LIKE '%{str(code)}%';")
+        row = cursor.fetchall()
+        row = list(row[0])[2]
+        if row != 0:
+            st = """С твоим статусом все отлично, желаем хорошо оторваться на дискотеке"""
+        else:
+            st = """На данный момент ты не можешь пройти на дискотеку, в ближайшее время найди организаторов ( Дима Сивашко 10 ''A'', Артур Демьянченко 11 "A" )"""
+        return st
+    except IndexError:
+        return """Такого пользователя не существет"""
 
 def update_user_pay(code):
     try:
